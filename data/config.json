@@ -1,0 +1,16 @@
+{
+  "intervalDays": 14,
+  "maxKeptPerSession": 15,
+  "minScoreToKeep": 3.5,
+  "keywords": {
+    "include": [
+      "c# 15", "c#", ".net 11", ".net", "asp.net core", "blazor", "signalr", "entity framework", "native aot",
+      "angular", "signal forms", "webmcp", "typescript",
+      "github copilot", "copilot", "coding agent", "agent mode", "github actions", "pull request",
+      "mcp", "ag-ui", "agent framework", "agentic", "agent", "foundry local", "on-device", "onnx", "local model", "windows ai"
+    ],
+    "actionable": ["preview", "release candidate", "rc1", "rc 1", "generally available", "deprecat", "breaking", "migration", "now available", "public preview", "stable", "retire"],
+    "exclude": ["security advisory", "advisories", "vulnerability report", "accessibility statement", "runner image", "macos", "sponsor", "billing"]
+  },
+  "entities": ["net 11", "c# 15", "angular 22", "copilot", "blazor", "mcp", "ag-ui", "foundry local"]
+}

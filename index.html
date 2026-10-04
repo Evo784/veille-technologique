@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Veille technologique : développement logiciel</title>
+  <meta name="description" content="Veille technologique sur le développement logiciel : C#/.NET, Angular, GitHub, IA appliquée au développement. Objectifs, KPIs, journal et scénarios.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#dashboard">Veille technologique</a>
+      <nav aria-label="Sections">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#objectifs">Objectifs</a>
+        <a href="#journal">Journal</a>
+        <a href="#sources">Sources</a>
+        <a href="#kpis">KPIs</a>
+        <a href="#methode">Méthode</a>
+        <a href="#biais">Biais</a>
+        <a href="#prospective">Prospective H3</a>
+        <a href="#matrice">Matrice</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="load-error" class="notice error" hidden></div>
+
+    <section id="dashboard">
+      <h1>Développement logiciel et évolutions du métier de développeur</h1>
+      <p class="lead">Veille sur C#, .NET, ASP.NET Core, Angular, Git/GitHub, outils de développement et IA appliquée au développement. Session formelle toutes les deux semaines.</p>
+      <div class="dates" id="dates"></div>
+      <div class="kpi-grid" id="kpi-cards"></div>
+      <div class="grid-2">
+        <div class="card"><h3>Répartition par thème</h3><div id="chart-theme"></div></div>
+        <div class="card"><h3>Répartition par horizon</h3><div id="chart-horizon"></div></div>
+      </div>
+      <div class="card" id="analysis"></div>
+      <div class="card"><h3>Historique des sessions</h3><div class="table-wrap"><table id="sessions-table"></table></div></div>
+    </section>
+
+    <section id="objectifs">
+      <h2>Objectifs de veille (SMART) et horizons</h2>
+      <p class="muted" id="smart"></p>
+      <div class="grid-3" id="horizons"></div>
+    </section>
+
+    <section id="journal">
+      <h2>Journal de veille</h2>
+      <div class="filters">
+        <input type="search" id="q" placeholder="Rechercher (titre, résumé, action)…" aria-label="Recherche textuelle">
+        <select id="f-horizon" aria-label="Filtre horizon"><option value="">Tous les horizons</option><option>H1</option><option>H2</option><option>H3</option></select>
+        <select id="f-theme" aria-label="Filtre thème"><option value="">Tous les thèmes</option></select>
+        <select id="f-flag" aria-label="Filtre signaux">
+          <option value="">Toutes les infos</option><option value="weak">Signaux faibles</option>
+          <option value="cross">Recoupées</option><option value="nocross">Non recoupées</option>
+        </select>
+      </div>
+      <p class="muted" id="count"></p>
+      <div id="entries" class="entries"></div>
+    </section>
+
+    <section id="sources">
+      <h2>Sources</h2>
+      <p class="muted">Autorité : 5 = officiel/éditeur ; 4 = média technique ou expert identifié ; 3 = communauté utile non officielle ; 1-2 = difficile à vérifier.</p>
+      <div class="card"><div class="table-wrap"><table id="sources-table"></table></div></div>
+    </section>
+
+    <section id="kpis">
+      <h2>KPIs / QMS</h2>
+      <p class="muted">Valeurs de la dernière session. Un KPI sans donnée suffisante affiche « n/d » plutôt qu'une valeur inventée.</p>
+      <div class="card"><div class="table-wrap"><table id="kpis-table"></table></div></div>
+      <p class="muted">Score qualité d'une information = 30 % pertinence + 25 % crédibilité + 25 % nouveauté + 20 % efficacité (sur 5).</p>
+    </section>
+
+    <section id="methode">
+      <h2>Méthode</h2>
+      <ol class="steps">
+        <li><b>Collecter</b><span>Flux RSS officiels (automatique) + sources manuelles (docs, roadmaps).</span></li>
+        <li><b>Vérifier</b><span>Source identifiable, date, source primaire, cross-check, méfiance envers le contenu SEO.</span></li>
+        <li><b>Analyser</b><span>Notes /5 (pertinence, crédibilité, nouveauté, efficacité, utilité), horizon, thème, signal faible.</span></li>
+        <li><b>Stocker</b><span>Une session datée en JSON par quinzaine : l'historique n'est jamais supprimé.</span></li>
+        <li><b>Diffuser</b><span>Ce site, publié sur GitHub Pages à chaque nouvelle session.</span></li>
+        <li><b>Ajuster</b><span>Sources et mots-clés corrigés selon les KPIs (section Analyse).</span></li>
+      </ol>
+      <div class="card">
+        <h3>Critères de vérification</h3>
+        <ul>
+          <li><b>Fiabilité</b> : autorité de la source notée /5 ; sources officielles prioritaires.</li>
+          <li><b>Cross-check</b> : « oui » seulement si une 2e source est citée dans la fiche (champ « recoupé avec »).</li>
+          <li><b>Date</b> : date de publication et date de collecte conservées ; « inconnue » si non vérifiable.</li>
+          <li><b>Fake news / hype</b> : annonces marketing marquées comme telles ; Reddit et Hacker News jamais comme preuve unique.</li>
+          <li><b>Langues et synonymes</b> : veille en anglais (langue des sources primaires) et en français ; mots-clés avec variantes (« agent », « agentic », « coding agent », « MCP »).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Outils par fonction</h3>
+        <table>
+          <tr><th>Fonction</th><th>Outil</th></tr>
+          <tr><td>Collecte</td><td>Flux RSS officiels, lecture manuelle des docs et roadmaps</td></tr>
+          <tr><td>Analyse</td><td>Script Node.js (filtrage, notation, KPIs) + relecture humaine</td></tr>
+          <tr><td>Visualisation</td><td>Ce site (HTML/CSS/JS) lisant des fichiers JSON</td></tr>
+          <tr><td>Organisation</td><td>Dépôt Git : une session par fichier daté, historique complet</td></tr>
+          <tr><td>Automatisation</td><td>GitHub Actions : exécution hebdomadaire, session si la dernière a plus de 14 jours</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="biais">
+      <h2>Biais identifiés</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Écosystème Microsoft / GitHub</h3><p>Une large part des sources sont des éditeurs du même groupe. Un recoupement entre deux blogs Microsoft n'est pas indépendant.</p></div>
+        <div class="card"><h3>Sources anglophones</h3><p>Quasiment 100 % d'anglais. Normal pour le développement, mais les usages et le marché francophones sont peu couverts.</p></div>
+        <div class="card"><h3>Technologies médiatisées</h3><p>Les agents IA dominent les annonces ; leur adoption réelle n'est pas mesurée par ces mêmes annonces.</p></div>
+        <div class="card"><h3>Annonces marketing</h3><p>Préversions et fonctionnalités expérimentales sont signalées comme telles ; elles ne valent pas adoption.</p></div>
+        <div class="card"><h3>Outils déjà utilisés</h3><p>La veille suit surtout ce que j'utilise (C#, Angular, GitHub). Des alternatives (autres langages, autres frameworks) peuvent être ignorées.</p></div>
+        <div class="card"><h3>Notation automatique</h3><p>Les sessions automatiques notent par mots-clés. Les scores sont à valider manuellement ; ils sont marqués « auto ».</p></div>
+      </div>
+    </section>
+
+    <section id="prospective">
+      <h2>Prospective H3</h2>
+      <p class="notice" id="scen-note"></p>
+      <div class="grid-3" id="scenarios"></div>
+    </section>
+
+    <section id="matrice">
+      <h2>Matrice de priorisation / criticité</h2>
+      <div class="card pending">
+        <p><b>En attente du cahier des charges « Étude Avant Projet ».</b></p>
+        <p class="muted">Les deux critères, leurs niveaux (échelle mesurable) et la notation des exigences seront définis à partir du vrai cahier des charges. Aucune analyse n'est présentée tant qu'il n'est pas disponible.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot"><span id="foot"></span></footer>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

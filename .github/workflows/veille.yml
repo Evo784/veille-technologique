@@ -1,0 +1,59 @@
+name: Veille bimensuelle
+
+# Lancé chaque lundi ; le script ne crée une session que si la dernière a plus de 14 jours.
+# Lancement manuel : onglet Actions > « Veille bimensuelle » > Run workflow (option : forcer).
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Forcer une session même si la dernière a moins de 14 jours"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: veille
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collecte, notation, KPIs
+        run: node scripts/update.mjs ${{ inputs.force && '--force' || '' }}
+      - name: Commit et push si de nouvelles données
+        id: commit
+        run: |
+          if [ -n "$(git status --porcelain data)" ]; then
+            git config user.name "veille-bot"
+            git config user.email "veille-bot@users.noreply.github.com"
+            git add data
+            git commit -m "data: session de veille $(date -u +%F)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Aucune nouvelle donnée."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # Un push fait avec GITHUB_TOKEN ne déclenche pas pages.yml : on l'appelle explicitement.
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

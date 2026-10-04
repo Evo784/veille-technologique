@@ -1,0 +1,24 @@
+{
+  "subject": "Développement logiciel et évolutions du métier de développeur",
+  "smart": "Spécifique : C#/.NET, Angular, Git/GitHub, outils et IA appliquée au développement. Mesurable : KPIs de la page KPIs. Atteignable : 5 à 20 infos par quinzaine. Réaliste : sources officielles, collecte semi-automatisée. Temporel : 3 horizons H1/H2/H3.",
+  "horizons": [
+    {
+      "id": "H1", "label": "Court terme", "timeframe": "0 à 6 mois",
+      "objective": "Suivre les nouveautés, mises à jour et bonnes pratiques autour de C#, .NET, Angular et des outils de développement utilisés en entreprise.",
+      "frequency": "Chaque semaine (collecte) ; session formelle toutes les 2 semaines",
+      "success": "Au moins 5 informations pertinentes par période de 2 semaines, dont au moins 70 % avec une pertinence >= 4/5."
+    },
+    {
+      "id": "H2", "label": "Moyen terme", "timeframe": "6 à 18 mois",
+      "objective": "Identifier et analyser les nouvelles technologies, frameworks et outils pouvant améliorer le développement, les performances ou la sécurité des applications.",
+      "frequency": "Suivi mensuel, bilan semestriel",
+      "success": "Au moins 2 technologies, pratiques ou outils réellement intéressants à tester par semestre."
+    },
+    {
+      "id": "H3", "label": "Long terme", "timeframe": "18 mois à ~3 ans",
+      "objective": "Anticiper les grandes évolutions du développement logiciel : IA dans le développement, IA locale, agents IA, nouvelles architectures, cloud, automatisation.",
+      "frequency": "Bilan trimestriel, revue annuelle",
+      "success": "Maintenir environ 3 scénarios prospectifs, révisés quand de nouveaux signaux faibles significatifs apparaissent."
+    }
+  ]
+}

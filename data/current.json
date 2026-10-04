@@ -1,0 +1,365 @@
+{
+  "generatedAt": "2026-10-04T21:23:48.830Z",
+  "lastSession": "2026-10-04",
+  "nextSession": "2026-10-18",
+  "intervalDays": 14,
+  "kpis": {
+    "count": 9,
+    "relevance_rate": 88.9,
+    "quality_avg": 4.26,
+    "crosscheck_rate": 60,
+    "crosscheck_base": 5,
+    "weak_signals": 5,
+    "actionable_rate": 88.9,
+    "nonfr_rate": 100,
+    "authority_avg": 4.89,
+    "volume": 9,
+    "utility_avg": 3.67
+  },
+  "kpisCumulative": {
+    "count": 9,
+    "relevance_rate": 88.9,
+    "quality_avg": 4.26,
+    "crosscheck_rate": 60,
+    "crosscheck_base": 5,
+    "weak_signals": 5,
+    "actionable_rate": 88.9,
+    "nonfr_rate": 100,
+    "authority_avg": 4.89,
+    "volume": 9,
+    "utility_avg": 3.67
+  },
+  "byTheme": {
+    "dotnet-csharp": 3,
+    "agents-ia": 2,
+    "github-copilot": 1,
+    "angular": 2,
+    "ia-locale": 1
+  },
+  "byHorizon": {
+    "H1": 4,
+    "H2": 4,
+    "H3": 5
+  },
+  "weakSignals": [
+    "Standardisation des protocoles d'agents (AG-UI) et SDK .NET officiel",
+    "Composants d'interface agentique dans Blazor (expérimental)",
+    "Copilot qui pilote des applications de bureau (computer use, préversion)",
+    "Angular : WebMCP, A2UI et intégration d'agents dans la roadmap",
+    "Foundry Local : IA locale pour développeurs, GA annoncée (à confirmer)"
+  ],
+  "adjustments": {
+    "sources": [
+      "Ajout du GitHub Blog (flux RSS) en complément du changelog.",
+      "Ajout de Microsoft Tech Community (blog Foundry) pour l'IA locale.",
+      "GitHub Changelog classé « bruyante » : 7 entrées sur 12 hors périmètre."
+    ],
+    "keywords": [
+      "Ajout : WebMCP, AG-UI, Foundry Local, agent framework, computer use.",
+      "Exclusion : security advisory, vulnerability report, runner image, macOS, accessibility statement."
+    ],
+    "horizons": [
+      "Aucun changement H1/H2/H3 : la répartition est cohérente (H1 : 4, H2 : 4, H3 : 5 ; une info peut couvrir plusieurs horizons).",
+      "Fréquence : collecte automatique hebdomadaire des flux, session formelle tous les 14 jours (inchangé)."
+    ]
+  },
+  "analysis": {
+    "noisySources": [
+      "GitHub Changelog (partiellement)",
+      "Résultats de recherche web : sites de contenu SEO et miroirs écartés (bacancytechnology, clickup, nitter, medium personnel)"
+    ],
+    "usefulSources": [
+      "Microsoft .NET Blog",
+      "Microsoft Learn",
+      "angular.dev",
+      "GitHub Changelog (après filtrage)"
+    ],
+    "underrepresented": [
+      "Git/GitHub hors Copilot",
+      "ASP.NET Core hors IA",
+      "Architectures logicielles",
+      "Sources francophones (Techniques de l'Ingénieur : aucune info retenue)"
+    ],
+    "conclusion": "9 informations conservées sur 69 examinées (13 %). Volume dans la cible (5 à 20). Pertinence et qualité au-dessus des cibles. Cross-check sous la cible : seuls 3 des 5 articles à forte utilité (60 %) sont recoupés, et les recoupements restent entre sources du même éditeur. Biais fort vers Microsoft et l'anglais."
+  },
+  "examined": 69,
+  "sessions": [
+    {
+      "date": "2026-10-04",
+      "type": "manuelle (session 1)",
+      "count": 9,
+      "examined": 69,
+      "kpis": {
+        "count": 9,
+        "relevance_rate": 88.9,
+        "quality_avg": 4.26,
+        "crosscheck_rate": 60,
+        "crosscheck_base": 5,
+        "weak_signals": 5,
+        "actionable_rate": 88.9,
+        "nonfr_rate": 100,
+        "authority_avg": 4.89,
+        "volume": 9,
+        "utility_avg": 3.67
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-09-08-dotnet-11-rc1",
+      "title": "Announcing .NET 11 Release Candidate 1",
+      "summary": "RC1 de .NET 11 avec licence go-live : améliorations bibliothèques, runtime, SDK, C# 15 (unions stabilisées), ASP.NET Core (API d'authentification SignalR finalisées, composants Blazor AI expérimentaux). Date de sortie finale non précisée dans l'article.",
+      "theme": "dotnet-csharp",
+      "horizon": [
+        "H1"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-1/",
+      "lang": "en",
+      "publishedAt": "2026-09-08",
+      "collectedAt": "2026-10-04",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 5,
+      "efficacy": 4,
+      "utility": 5,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15",
+        "https://devblogs.microsoft.com/dotnet/build-agentic-ui-blazor/"
+      ],
+      "weakSignal": false,
+      "actionable": true,
+      "action": "Installer le SDK RC1 et compiler un projet ASP.NET Core existant ; noter les ruptures éventuelles avant la sortie finale.",
+      "notes": "Source primaire. Recoupée avec la doc C# 15 et le billet Blazor AI (même éditeur).",
+      "quality": 4.8,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "2026-09-11-csharp-15-whats-new",
+      "title": "What's new in C# 15",
+      "summary": "Fonctionnalités de C# 15 : arguments de collection expressions, types union, hiérarchies fermées (closed), indexeurs d'extension, break/continue étiquetés, nouveau modèle de sécurité mémoire. Fonctionnalités encore en préversion.",
+      "theme": "dotnet-csharp",
+      "horizon": [
+        "H1",
+        "H2"
+      ],
+      "source": "ms-learn",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15",
+      "lang": "en",
+      "publishedAt": "2026-09-11",
+      "collectedAt": "2026-10-04",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-1/"
+      ],
+      "weakSignal": false,
+      "actionable": true,
+      "action": "Étudier les unions et closed hierarchies sur un petit exemple (modèle métier avec switch exhaustif).",
+      "notes": "Date = métadonnée ms.date de la page (mise à jour du 2026-09-14).",
+      "quality": 4.55,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "2026-09-08-unions-closed-aspnetcore",
+      "title": "Use C# unions and closed hierarchies in ASP.NET Core",
+      "summary": "Billet du .NET Blog sur l'usage des unions C# et des hiérarchies fermées dans ASP.NET Core. Seul le titre et la date ont été vérifiés ; contenu détaillé non lu.",
+      "theme": "dotnet-csharp",
+      "horizon": [
+        "H1"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/unions-and-closed-hierarchies-in-aspnetcore/",
+      "lang": "en",
+      "publishedAt": "2026-09-08",
+      "collectedAt": "2026-10-04",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": false,
+      "actionable": true,
+      "action": "Lire le billet en entier et l'essayer dans un endpoint minimal API.",
+      "notes": "Non recoupé : le sujet (unions) est confirmé par la doc C# 15, pas le contenu de ce billet.",
+      "quality": 4.25,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "2026-09-28-blazor-ai-components",
+      "title": "Build Agentic UI with the new Blazor AI components",
+      "summary": "Composants Blazor expérimentaux pour construire des interfaces agentiques : affichage de flux d'interactions d'agents sous forme de blocs de contenu. Statut expérimental, retours demandés sur le dépôt dotnet/aspnetcore.",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/build-agentic-ui-blazor/",
+      "lang": "en",
+      "publishedAt": "2026-09-28",
+      "collectedAt": "2026-10-04",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 5,
+      "efficacy": 3,
+      "utility": 3,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-1/"
+      ],
+      "weakSignal": true,
+      "actionable": true,
+      "action": "Tester les composants dans un projet Blazor jetable ; ne pas les utiliser en production (expérimental).",
+      "notes": "Recoupement faible : RC1 mentionne les composants, mais même éditeur (Microsoft).",
+      "quality": 4.3,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "2026-09-25-ag-ui-dotnet-sdk",
+      "title": "AG-UI Protocol now has a first-class .NET SDK",
+      "summary": "SDK .NET officiel du protocole AG-UI (événements typés du cycle de vie d'un agent), en collaboration avec CopilotKit : 5 packages NuGet, serveur et client, compatible IChatClient. Microsoft Agent Framework en dépend désormais.",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/ag-ui-dotnet-sdk/",
+      "lang": "en",
+      "publishedAt": "2026-09-25",
+      "collectedAt": "2026-10-04",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 5,
+      "efficacy": 3,
+      "utility": 3,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": true,
+      "actionable": true,
+      "action": "Surveiller l'adoption du protocole hors Microsoft (TypeScript, Python) avant de l'intégrer dans un projet.",
+      "notes": "Signal de standardisation des protocoles d'agents. Non recoupé.",
+      "quality": 4.3,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "2026-10-01-copilot-computer-use",
+      "title": "GitHub Copilot can now interact with desktop apps with computer use",
+      "summary": "En préversion publique dans Copilot CLI et l'application Copilot (macOS, Windows) : Copilot peut lire, cliquer et saisir dans des applications de bureau, avec demande d'approbation. Désactivable par les administrateurs d'organisation.",
+      "theme": "github-copilot",
+      "horizon": [
+        "H3"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps",
+      "lang": "en",
+      "publishedAt": "2026-10-01",
+      "collectedAt": "2026-10-04",
+      "relevance": 3,
+      "credibility": 5,
+      "novelty": 5,
+      "efficacy": 3,
+      "utility": 3,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": true,
+      "actionable": false,
+      "action": "Information seulement : surveiller le passage en disponibilité générale et les garde-fous de sécurité.",
+      "notes": "Pertinence 3 : l'automatisation d'applications de bureau est en périphérie du métier de développeur.",
+      "quality": 4,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "2026-06-03-angular-v22",
+      "title": "Announcing Angular v22",
+      "summary": "Angular v22 : Signal Forms, Angular Aria et les API de réactivité asynchrone passent en stable ; OnPush devient la détection de changements par défaut ; outillage pour le développement assisté par IA.",
+      "theme": "angular",
+      "horizon": [
+        "H1"
+      ],
+      "source": "angular",
+      "url": "https://blog.angular.dev/announcing-angular-v22-c52bb83a4664",
+      "lang": "en",
+      "publishedAt": "2026-06-03",
+      "collectedAt": "2026-10-04",
+      "relevance": 5,
+      "credibility": 4,
+      "novelty": 3,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://angular.dev/roadmap"
+      ],
+      "weakSignal": false,
+      "actionable": true,
+      "action": "Vérifier la version Angular de mes projets et planifier la migration vers v22 (OnPush par défaut).",
+      "notes": "Le blog renvoie HTTP 403 en accès automatique : contenu et date obtenus via résultat de recherche, non relus sur la page. Recoupement : la roadmap officielle cite v22.2.1. Même éditeur.",
+      "quality": 4.05,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "undated-angular-roadmap",
+      "title": "Angular Roadmap (priorités : IA, DX, performance)",
+      "summary": "Priorités : expérience IA (WebMCP en expérimentation, intégrations Gemini CLI et IDE agentiques, compétences d'agents/MCP), compilateur TypeScript natif tsgo (accélération annoncée de 5 à 10x), migration Karma vers Vitest, Angular Aria, support de A2UI.",
+      "theme": "angular",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "angular-roadmap",
+      "url": "https://angular.dev/roadmap",
+      "lang": "en",
+      "publishedAt": null,
+      "collectedAt": "2026-10-04",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": true,
+      "actionable": true,
+      "action": "Tester le passage de Karma à Vitest sur un projet Angular ; suivre WebMCP et tsgo.",
+      "notes": "Page sans date de publication (page vivante). Non recoupé.",
+      "quality": 4.55,
+      "session": "2026-10-04"
+    },
+    {
+      "id": "unknown-foundry-local-ga",
+      "title": "Foundry Local généralement disponible + red teaming local d'agents",
+      "summary": "Foundry Local (exécution de modèles de langage sur l'appareil : Windows, macOS, Linux ; SDK Python, JS, C#, Rust) annoncé généralement disponible, et ajout d'un scan « AI Red Teaming Agent » local en préversion publique.",
+      "theme": "ia-locale",
+      "horizon": [
+        "H3"
+      ],
+      "source": "techcommunity",
+      "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/securing-on-device-ai-evaluating-foundry-local-models-with-ai-red-teaming-agent/4541303",
+      "lang": "en",
+      "publishedAt": null,
+      "collectedAt": "2026-10-04",
+      "relevance": 4,
+      "credibility": 3,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 3,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": true,
+      "actionable": true,
+      "action": "Retrouver l'annonce officielle de la disponibilité générale, puis essayer Foundry Local avec le SDK C#.",
+      "notes": "Résumé issu d'un agrégateur (news.baeke.info, relevé le 2026-10-04) ; la page primaire n'a pas pu être lue. Date de publication inconnue. Crédibilité 3 tant que non vérifié.",
+      "quality": 3.55,
+      "session": "2026-10-04"
+    }
+  ]
+}
