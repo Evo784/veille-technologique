@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T21:23:48.830Z",
+  "generatedAt": "2026-10-05T04:39:11.347Z",
   "lastSession": "2026-10-04",
   "nextSession": "2026-10-18",
   "intervalDays": 14,
@@ -50,13 +50,13 @@
   ],
   "adjustments": {
     "sources": [
-      "Ajout du GitHub Blog (flux RSS) en complément du changelog.",
-      "Ajout de Microsoft Tech Community (blog Foundry) pour l'IA locale.",
-      "GitHub Changelog classé « bruyante » : 7 entrées sur 12 hors périmètre."
+      "Ajout du GitHub Blog pour compléter le changelog.",
+      "Ajout du blog Foundry (Tech Community) pour l'IA locale.",
+      "Changelog GitHub filtré par mots-clés."
     ],
     "keywords": [
-      "Ajout : WebMCP, AG-UI, Foundry Local, agent framework, computer use.",
-      "Exclusion : security advisory, vulnerability report, runner image, macOS, accessibility statement."
+      "Nouveaux : WebMCP, AG-UI, Foundry Local, computer use.",
+      "Exclus : security advisory, runner image, macOS."
     ],
     "horizons": [
       "Aucun changement H1/H2/H3 : la répartition est cohérente (H1 : 4, H2 : 4, H3 : 5 ; une info peut couvrir plusieurs horizons).",
@@ -80,7 +80,7 @@
       "Architectures logicielles",
       "Sources francophones (Techniques de l'Ingénieur : aucune info retenue)"
     ],
-    "conclusion": "9 informations conservées sur 69 examinées (13 %). Volume dans la cible (5 à 20). Pertinence et qualité au-dessus des cibles. Cross-check sous la cible : seuls 3 des 5 articles à forte utilité (60 %) sont recoupés, et les recoupements restent entre sources du même éditeur. Biais fort vers Microsoft et l'anglais."
+    "conclusion": "Volume correct : 9 infos gardées sur 69 lues, dans la fourchette de 5 à 20. Pertinence et qualité au-dessus des objectifs. Le point faible, c'est le recoupement : 3 infos importantes sur 5 seulement, et toujours avec une source du même éditeur. Le changelog GitHub est bruyant (7 entrées sur 12 hors sujet). Peu ou rien sur Git hors Copilot, l'architecture logicielle et les sources françaises."
   },
   "examined": 69,
   "sessions": [

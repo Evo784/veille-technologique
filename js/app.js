@@ -4,13 +4,24 @@ const THEMES = {
   "dotnet-csharp": "C# / .NET", "angular": "Angular", "github-copilot": "GitHub / Copilot",
   "agents-ia": "Agents IA", "ia-locale": "IA locale", "outils-dev": "Outils de dev", "architecture-cloud": "Architecture / cloud",
 };
-const STATUS_LABEL = { ok: "Atteint", warn: "À surveiller", alert: "Alerte", na: "n/d" };
+const STATUS = { ok: "atteint", warn: "à surveiller", alert: "alerte", na: "pas de données" };
+const VIEWS = ["veille", "objectifs", "methode", "prospective", "criticite"];
+
 const $ = (id) => document.getElementById(id);
 const themeName = (t) => THEMES[t] ?? t ?? "Autre";
-const fmtDate = (d) => (d ? new Date(d + "T00:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "inconnue");
-const num = (v, unit = "") => (v === null || v === undefined ? "n/d" : `${String(v).replace(".", ",")}${unit === "%" ? " %" : unit === "/5" ? "/5" : ""}`);
+const toDate = (d) => new Date(d + "T00:00:00");
+const longDate = (d) => (d ? toDate(d).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "inconnue");
+const shortDate = (d) => (d ? toDate(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "short" }).replace(".", "") : "sans date");
+const fr = (v) => String(v).replace(".", ",");
+const fmt = (v, unit) => {
+  if (v === null || v === undefined) return "–";
+  if (unit === "%") return `${fr(Math.round(v))} %`;
+  if (unit === "/5") return `${fr(Math.round(v * 10) / 10)}/5`;
+  return fr(v);
+};
+const safeUrl = (u) => (/^https?:\/\//.test(u ?? "") ? u : "#");
 
-// Création de nœuds DOM : le contenu externe passe toujours par textContent.
+// Le contenu des JSON passe toujours par textContent.
 function el(tag, props = {}, ...children) {
   const n = document.createElement(tag);
   for (const [k, v] of Object.entries(props)) {
@@ -19,11 +30,20 @@ function el(tag, props = {}, ...children) {
     else if (k === "text") n.textContent = v;
     else n.setAttribute(k, v);
   }
-  for (const c of children.flat()) if (c !== null && c !== undefined) n.append(c.nodeType ? c : document.createTextNode(c));
+  for (const c of children.flat()) if (c !== null && c !== undefined && c !== false) n.append(c.nodeType ? c : document.createTextNode(c));
   return n;
 }
-const badge = (text, cls) => el("span", { class: `badge ${cls}`, text });
-const safeUrl = (u) => (/^https?:\/\//.test(u ?? "") ? u : "#");
+const link = (href, text) => el("a", { href: safeUrl(href), target: "_blank", rel: "noopener noreferrer", text });
+
+// ---------- navigation ----------
+function route() {
+  const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "veille";
+  document.querySelectorAll("[data-view]").forEach((s) => (s.hidden = s.dataset.view !== v));
+  document.querySelectorAll("nav a").forEach((a) => (a.hash === `#${v}` ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current")));
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+route();
 
 async function getJson(path) {
   const r = await fetch(path, { cache: "no-cache" });
@@ -34,167 +54,167 @@ async function getJson(path) {
 async function init() {
   let cur, objectives, sources, kpiDefs, scenarios;
   try {
-    [cur, objectives, sources, kpiDefs, scenarios] = await Promise.all([
-      getJson("data/current.json"), getJson("data/objectives.json"), getJson("data/sources.json"),
-      getJson("data/kpis.json"), getJson("data/scenarios.json"),
-    ]);
+    [cur, objectives, sources, kpiDefs, scenarios] = await Promise.all(
+      ["current", "objectives", "sources", "kpis", "scenarios"].map((f) => getJson(`data/${f}.json`)));
   } catch (e) {
     const box = $("load-error");
     box.hidden = false;
-    box.textContent = `Données illisibles (${e.message}). En local, lancez un serveur (npx serve .) : l'ouverture directe du fichier ne permet pas de lire les JSON.`;
+    box.textContent = `Impossible de lire les données (${e.message}). En local, lancer un serveur : npx serve .`;
     return;
   }
   const srcById = new Map(sources.sources.map((s) => [s.id, s]));
   const items = cur.items ?? [];
-  // KPIs : valeurs de la dernière session ; recalculées depuis les items si absentes (session vide ou ancienne).
-  const lastItems = items.filter((i) => i.session === cur.lastSession);
-  const kpis = cur.kpis ?? computeKpis(lastItems, sources.sources);
+  const kpis = cur.kpis ?? computeKpis(items.filter((i) => i.session === cur.lastSession), sources.sources);
+  const defs = new Map(kpiDefs.kpis.map((d) => [d.id, d]));
 
-  renderDashboard(cur, kpis, kpiDefs.kpis);
-  renderObjectives(objectives);
-  renderJournal(items, srcById);
-  renderSources(sources.sources);
-  renderKpiTable(kpiDefs.kpis, kpis);
+  renderVeille(cur, kpis, defs, items, srcById);
+  renderObjectives(objectives, kpiDefs.kpis, kpis);
+  renderMethode(sources.sources, cur.sessions ?? []);
   renderScenarios(scenarios);
-  $("foot").textContent = `Données générées le ${cur.generatedAt ? new Date(cur.generatedAt).toLocaleDateString("fr-FR") : "?"} · Projet scolaire : veille technologique.`;
+  $("foot").replaceChildren(
+    el("span", { text: "Edwyn Houillier · veille technologique, projet de cours" }),
+    el("span", { text: `Données mises à jour le ${cur.generatedAt ? new Date(cur.generatedAt).toLocaleDateString("fr-FR") : "?"}` }));
 }
 
-function renderDashboard(cur, kpis, defs) {
-  const dates = $("dates");
-  dates.replaceChildren(
-    el("span", {}, "Dernière veille : ", el("b", { text: fmtDate(cur.lastSession) })),
-    el("span", {}, "Prochaine prévue : ", el("b", { text: `vers le ${fmtDate(cur.nextSession)}` })),
-    el("span", {}, "Rythme : ", el("b", { text: `tous les ${cur.intervalDays ?? 14} jours` })),
-  );
-  const ids = ["volume", "relevance_rate", "quality_avg", "crosscheck_rate", "weak_signals", "actionable_rate"];
-  const cards = ids.map((id) => {
-    const d = defs.find((x) => x.id === id);
-    const v = id === "volume" ? kpis.volume : kpis[id];
-    const st = kpiStatus(d, v);
-    const target = d.direction === "range" ? `Cible ${d.target} à ${d.targetMax}` : `Cible ≥ ${num(d.target, d.unit)}`;
-    const label = id === "volume" ? "Informations conservées" : d.name;
-    return el("div", { class: `kpi ${st}` },
-      el("div", { class: "v", text: num(v, d.unit) }),
-      el("div", { class: "l", text: label }),
-      el("div", { class: "t", text: `${target} · ${STATUS_LABEL[st]}` }));
-  });
-  $("kpi-cards").replaceChildren(...cards);
+// ---------- veille ----------
+function renderVeille(cur, kpis, defs, items, srcById) {
+  $("session-line").textContent = cur.lastSession
+    ? `Session du ${longDate(cur.lastSession)} · ${kpis.volume} infos retenues${cur.examined ? ` sur ${cur.examined} lues` : ""} · prochaine vers le ${longDate(cur.nextSession)}`
+    : "Aucune session pour l'instant.";
 
-  bars($("chart-theme"), cur.byTheme ?? {}, themeName);
-  bars($("chart-horizon"), cur.byHorizon ?? {}, (k) => k);
+  const figure = (id, label) => {
+    const d = defs.get(id); const v = kpis[id]; const st = kpiStatus(d, v);
+    const unit = d.unit === "%" ? " %" : d.unit === "/5" ? "/5" : "";
+    const shown = v === null || v === undefined ? "–" : d.unit === "%" ? fr(Math.round(v)) : d.unit === "/5" ? fr(Math.round(v * 10) / 10) : fr(v);
+    return el("div", { class: st === "ok" || st === "na" ? "" : "below" },
+      el("dt", { text: label }),
+      el("dd", {}, shown, v !== null && v !== undefined && unit ? el("small", { text: unit }) : null),
+      el("span", { class: "target", text: `objectif ${d.unit === "nb" ? "≥ " + d.target : fmt(d.target, d.unit)}` }));
+  };
+  $("figures").replaceChildren(
+    figure("relevance_rate", "Infos pertinentes"),
+    figure("quality_avg", "Qualité moyenne"),
+    figure("crosscheck_rate", "Recoupées"),
+    figure("weak_signals", "Signaux faibles"));
 
-  const a = cur.analysis, adj = cur.adjustments;
-  const box = $("analysis");
-  box.replaceChildren(el("h3", { text: "Analyse de la dernière session et ajustements" }));
-  if (!a && !adj) { box.append(el("p", { class: "muted", text: "Aucune analyse disponible." })); return; }
-  if (cur.examined) box.append(el("p", {}, el("b", { text: "Volume : " }), `${kpis.volume} informations conservées sur ${cur.examined} examinées.`));
-  if (a?.conclusion) box.append(el("p", { text: a.conclusion }));
-  const list = (title, arr) => arr?.length ? [el("p", {}, el("b", { text: title })), el("ul", {}, arr.map((t) => el("li", { text: t })))] : [];
-  box.append(
-    ...list("Sources utiles", a?.usefulSources), ...list("Sources trop bruyantes", a?.noisySources),
-    ...list("Sujets sous-représentés", a?.underrepresented),
-    ...list("Ajustements : sources", adj?.sources), ...list("Ajustements : mots-clés", adj?.keywords),
-    ...list("Ajustements : horizons", adj?.horizons), ...list("Signaux faibles de la session", cur.weakSignals));
+  const adj = cur.adjustments ?? {};
+  const changes = [...(adj.sources ?? []), ...(adj.keywords ?? [])].slice(0, 5);
+  $("takeaway").replaceChildren(
+    el("div", {}, el("h3", { text: "Bilan de la session" }), el("p", { text: cur.analysis?.conclusion ?? "Pas encore de bilan." }),
+      el("p", { class: "spread", text: "Par thème : " + Object.entries(cur.byTheme ?? {}).sort((a, b) => b[1] - a[1]).map(([t, n]) => `${themeName(t)} ${n}`).join(" · ") }),
+      el("p", { class: "spread", text: "Par horizon : " + ["H1", "H2", "H3"].map((h) => `${h} ${cur.byHorizon?.[h] ?? 0}`).join(" · ") })),
+    changes.length ? el("div", {}, el("h3", { text: "Ce que j'ajuste" }), el("ul", {}, changes.map((t) => el("li", { text: t })))) : null);
 
-  const t = $("sessions-table");
-  t.replaceChildren(
-    el("tr", {}, ["Date", "Type", "Examinées", "Conservées", "Pertinence", "Qualité", "Cross-check", "Signaux faibles"].map((h) => el("th", { text: h }))),
-    ...[...(cur.sessions ?? [])].reverse().map((s) => el("tr", {},
-      el("td", { text: fmtDate(s.date) }), el("td", { text: s.type ?? "n/d" }), el("td", { text: s.examined ?? "n/d" }),
-      el("td", { text: s.count }), el("td", { text: num(s.kpis?.relevance_rate, "%") }), el("td", { text: num(s.kpis?.quality_avg, "/5") }),
-      el("td", { text: num(s.kpis?.crosscheck_rate, "%") }), el("td", { text: s.kpis?.weak_signals ?? "n/d" }))));
-}
-
-function bars(root, dist, label) {
-  const entries = Object.entries(dist).sort((a, b) => b[1] - a[1]);
-  if (!entries.length) { root.replaceChildren(el("p", { class: "muted", text: "Aucune donnée." })); return; }
-  const max = Math.max(...entries.map(([, n]) => n));
-  root.replaceChildren(...entries.map(([k, n]) => el("div", { class: "bar-row" },
-    el("span", { text: label(k) }), el("div", { class: "bar" }, el("i", { style: `width:${(n / max) * 100}%` })), el("b", { text: n }))));
-}
-
-function renderObjectives(o) {
-  $("smart").textContent = o.smart ?? "";
-  $("horizons").replaceChildren(...o.horizons.map((h) => el("div", { class: "card" },
-    el("h3", {}, badge(h.id, h.id), ` ${h.label}`),
-    el("p", {}, el("b", { text: "Temporalité : " }), h.timeframe),
-    el("p", {}, el("b", { text: "Objectif : " }), h.objective),
-    el("p", {}, el("b", { text: "Fréquence : " }), h.frequency),
-    el("p", {}, el("b", { text: "Critère de réussite : " }), h.success))));
-}
-
-function renderJournal(items, srcById) {
   const themes = [...new Set(items.map((i) => i.theme))];
   $("f-theme").append(...themes.map((t) => el("option", { value: t, text: themeName(t) })));
-  const ctl = { q: $("q"), h: $("f-horizon"), t: $("f-theme"), f: $("f-flag") };
-
+  const q = $("q"), fh = $("f-horizon"), ft = $("f-theme"), fw = $("f-weak");
   const draw = () => {
-    const q = ctl.q.value.trim().toLowerCase();
+    const s = q.value.trim().toLowerCase();
     const list = items.filter((i) =>
-      (!ctl.h.value || (i.horizon ?? []).includes(ctl.h.value)) &&
-      (!ctl.t.value || i.theme === ctl.t.value) &&
-      (!ctl.f.value || (ctl.f.value === "weak" ? i.weakSignal === true : ctl.f.value === "cross" ? i.crossChecked === true : i.crossChecked !== true)) &&
-      (!q || [i.title, i.summary, i.action, i.notes].some((s) => (s ?? "").toLowerCase().includes(q))));
-    $("count").textContent = `${list.length} information${list.length > 1 ? "s" : ""} sur ${items.length}`;
-    $("entries").replaceChildren(...(list.length ? list.map((i) => entry(i, srcById)) : [el("div", { class: "empty", text: items.length ? "Aucun résultat pour ces filtres." : "Aucune information collectée pour le moment." })]));
+      (!fh.value || (i.horizon ?? []).includes(fh.value)) &&
+      (!ft.value || i.theme === ft.value) &&
+      (!fw.checked || i.weakSignal === true) &&
+      (!s || [i.title, i.summary, i.action].some((x) => (x ?? "").toLowerCase().includes(s))));
+    $("entries").replaceChildren(...(list.length
+      ? list.map((i) => entry(i, srcById))
+      : [el("li", { class: "empty", text: items.length ? "Rien ne correspond." : "Aucune information collectée pour l'instant." })]));
   };
-  Object.values(ctl).forEach((c) => c.addEventListener("input", draw));
+  [q, fh, ft, fw].forEach((c) => c.addEventListener("input", draw));
   draw();
 }
 
 function entry(i, srcById) {
-  const s = srcById.get(i.source);
-  const scores = [["P", i.relevance], ["C", i.credibility], ["N", i.novelty], ["E", i.efficacy]].map(([k, v]) => `${k} ${v ?? "n/d"}`).join(" · ");
-  return el("article", { class: "entry" },
-    el("div", { class: "badges" },
-      ...(i.horizon ?? []).map((h) => badge(h, h)), badge(themeName(i.theme), "plain"),
-      i.weakSignal ? badge("Signal faible", "weak") : null,
-      i.crossChecked ? badge("Recoupé", "ok") : badge("Non recoupé", "na"),
-      i.review === "auto" ? badge("Notation auto", "warn") : null),
-    el("h3", {}, el("a", { href: safeUrl(i.url), target: "_blank", rel: "noopener noreferrer", text: i.title })),
-    el("p", { text: i.summary ?? "Résumé non disponible." }),
-    i.action ? el("p", { class: "action" }, el("b", { text: "Action possible : " }), i.action) : null,
-    el("div", { class: "meta" },
-      el("span", { text: `Source : ${s?.name ?? i.source}${s ? ` (autorité ${s.authority}/5)` : ""}` }),
-      el("span", { text: `Publié : ${fmtDate(i.publishedAt)}` }), el("span", { text: `Collecté : ${fmtDate(i.collectedAt)}` }),
-      el("span", { text: `Langue : ${(i.lang ?? "?").toUpperCase()}` }),
-      el("span", { text: `Qualité ${num(i.quality)}/5 (${scores})` }), el("span", { text: `Utilité ${i.utility ?? "n/d"}/5` })),
-    (i.notes || i.crossCheckWith?.length) ? el("details", {}, el("summary", { text: "Vérification" }),
-      i.notes ? el("p", { text: i.notes }) : null,
-      ...(i.crossCheckWith ?? []).map((u) => el("div", {}, "Recoupé avec : ", el("a", { href: safeUrl(u), target: "_blank", rel: "noopener noreferrer", text: u })))) : null);
+  const src = srcById.get(i.source);
+  const sub = [src?.name ?? i.source, themeName(i.theme)].join(" · ");
+  const checks = (i.crossCheckWith ?? []);
+  return el("li", { class: "entry" }, el("details", {},
+    el("summary", {},
+      el("span", { class: "date", text: shortDate(i.publishedAt) }),
+      el("span", {},
+        el("span", { class: "title", text: i.title }),
+        el("span", { class: "sub" }, sub, i.weakSignal ? el("span", { class: "weak", text: " · signal faible" }) : null,
+          i.review === "auto" ? " · notation auto" : null)),
+      el("span", { class: "hz", text: (i.horizon ?? []).join(" ") })),
+    el("div", { class: "body" },
+      el("p", { text: i.summary ?? "Pas de résumé." }),
+      i.action ? el("p", { class: "todo", text: i.action }) : null,
+      el("p", { class: "check-note" },
+        i.crossChecked ? "Recoupé avec " : "Pas recoupé. ",
+        ...checks.flatMap((u, k) => [k ? ", " : "", link(u, new URL(u).hostname + new URL(u).pathname.replace(/\/$/, "").slice(0, 40))]),
+        i.crossChecked ? ". " : "",
+        i.notes ?? ""),
+      el("p", {}, link(i.url, "Lire la source originale →")),
+      el("div", { class: "facts" },
+        el("span", { text: `pertinence ${i.relevance ?? "–"}` }), el("span", { text: `crédibilité ${i.credibility ?? "–"}` }),
+        el("span", { text: `nouveauté ${i.novelty ?? "–"}` }), el("span", { text: `efficacité ${i.efficacy ?? "–"}` }),
+        el("span", { text: `qualité ${i.quality != null ? fr(i.quality) : "–"}/5` }), el("span", { text: `utilité ${i.utility ?? "–"}/5` }),
+        el("span", { text: `publié ${longDate(i.publishedAt)}` }), el("span", { text: `collecté ${longDate(i.collectedAt)}` }),
+        el("span", { text: (i.lang ?? "?").toUpperCase() })))));
 }
 
-function renderSources(list) {
-  const rows = list.map((s) => el("tr", {},
-    el("td", {}, el("a", { href: safeUrl(s.url), target: "_blank", rel: "noopener noreferrer", text: s.name }), s.note ? el("div", { class: "muted", text: s.note }) : null),
-    el("td", { text: s.type }), el("td", { text: s.lang.toUpperCase() }), el("td", { text: `${s.authority}/5` }),
-    el("td", { text: s.frequency }), el("td", { text: s.collection }), el("td", {}, badge(s.status ?? "n/d", s.status === "bruyante" ? "warn" : s.status === "utile" ? "ok" : "na"))));
-  $("sources-table").replaceChildren(
-    el("tr", {}, ["Source", "Type", "Langue", "Autorité", "Fréquence", "Collecte", "Bilan"].map((h) => el("th", { text: h }))), ...rows);
-}
+// ---------- objectifs & KPIs ----------
+function renderObjectives(o, defs, kpis) {
+  $("smart").textContent = o.smart ?? "";
+  $("horizons").replaceChildren(...o.horizons.map((h) => el("div", { class: "h" },
+    el("div", { class: "h-id", text: h.id }),
+    el("div", { class: "h-when", text: `${h.label.toLowerCase()} · ${h.timeframe}` }),
+    el("p", { text: h.objective }),
+    el("p", {}, el("span", { class: "label", text: "Rythme" }), h.frequency),
+    el("p", {}, el("span", { class: "label", text: "Réussi si" }), h.success))));
 
-function renderKpiTable(defs, kpis) {
   const rows = defs.map((d) => {
     const v = kpis[d.id]; const st = kpiStatus(d, v);
-    const target = d.direction === "range" ? `${d.target} à ${d.targetMax}` : `≥ ${num(d.target, d.unit)}`;
-    const alert = d.direction === "range" ? `> ${d.alert}` : `< ${num(d.alert, d.unit)}`;
+    const target = d.direction === "range" ? `${d.target} à ${d.targetMax}` : `≥ ${fmt(d.target, d.unit)}`;
+    const alert = d.direction === "range" ? `> ${d.alert}` : `< ${fmt(d.alert, d.unit)}`;
     return el("tr", {},
-      el("td", {}, el("b", { text: d.name })), el("td", { text: d.family }),
-      el("td", {}, el("b", { text: num(v, d.unit) }), " ", badge(STATUS_LABEL[st], st)),
-      el("td", { text: target }), el("td", { text: alert }), el("td", { text: d.definition }), el("td", { text: d.action }));
+      el("td", {}, el("span", { class: "def", text: d.family }), el("b", { text: d.name }),
+        el("span", { class: "def", text: d.definition }), el("span", { class: "def", text: `Si alerte : ${d.action}` })),
+      el("td", {}, el("span", { class: "val", text: fmt(v, d.unit) })),
+      el("td", { class: "mono", text: target }),
+      el("td", { class: "mono", text: alert }),
+      el("td", {}, el("span", { class: `status ${st}`, text: STATUS[st] })));
   });
   $("kpis-table").replaceChildren(
-    el("tr", {}, ["KPI", "Famille", "Valeur", "Cible", "Seuil d'alerte", "Définition", "Action corrective"].map((h) => el("th", { text: h }))), ...rows);
+    el("thead", {}, el("tr", {}, ["Indicateur", "Valeur", "Cible", "Alerte", "État"].map((h) => el("th", { text: h })))),
+    el("tbody", {}, rows));
+  wrapScroll($("kpis-table"));
 }
 
+// ---------- sources & méthode ----------
+function renderMethode(list, sessions) {
+  $("sources-table").replaceChildren(
+    el("thead", {}, el("tr", {}, ["Source", "Type", "Langue", "Autorité", "Rythme", "Collecte"].map((h) => el("th", { text: h })))),
+    el("tbody", {}, list.map((s) => el("tr", {},
+      el("td", {}, link(s.url, s.name), s.note ? el("span", { class: "src-note", text: s.note }) : null),
+      el("td", { text: s.type }), el("td", { class: "mono", text: s.lang.toUpperCase() }),
+      el("td", { class: "mono", text: `${s.authority}/5` }), el("td", { text: s.frequency }), el("td", { text: s.collection })))));
+  wrapScroll($("sources-table"));
+
+  $("sessions-table").replaceChildren(
+    el("thead", {}, el("tr", {}, ["Date", "Lues", "Retenues", "Pertinentes", "Qualité", "Recoupées", "Signaux faibles"].map((h) => el("th", { text: h })))),
+    el("tbody", {}, [...sessions].reverse().map((s) => el("tr", {},
+      el("td", { text: longDate(s.date) }), el("td", { text: s.examined ?? "–" }), el("td", { text: s.count }),
+      el("td", { text: fmt(s.kpis?.relevance_rate, "%") }), el("td", { text: fmt(s.kpis?.quality_avg, "/5") }),
+      el("td", { text: fmt(s.kpis?.crosscheck_rate, "%") }), el("td", { text: s.kpis?.weak_signals ?? "–" })))));
+  wrapScroll($("sessions-table"));
+}
+
+function wrapScroll(table) {
+  if (table.parentElement.classList.contains("table-scroll")) return;
+  const w = el("div", { class: "table-scroll" });
+  table.replaceWith(w); w.append(table);
+}
+
+// ---------- prospective ----------
 function renderScenarios(sc) {
-  $("scen-note").textContent = `${sc.note} Dernière révision : ${fmtDate(sc.updated)}.`;
+  $("scen-note").textContent = `Ce ne sont pas des prédictions : ce sont trois futurs possibles que je confronte aux signaux de chaque session. Dernière révision le ${longDate(sc.updated)}.`;
   const list = (t, arr) => [el("h4", { text: t }), el("ul", {}, (arr ?? []).map((x) => el("li", { text: x })))];
-  $("scenarios").replaceChildren(...sc.scenarios.map((s) => el("div", { class: "card scen" },
-    el("h3", {}, el("span", { text: `${s.id} · ${s.title}` })),
+  $("scenarios").replaceChildren(...sc.scenarios.map((s, k) => el("article", { class: "scen" },
+    el("span", { class: "num", text: `Scénario ${k + 1}` }),
+    el("h3", { text: s.title }),
     el("p", { text: s.summary }),
     el("h4", { text: "Hypothèse" }), el("p", { text: s.hypothesis }),
-    ...list("Signaux observés", s.signals), ...list("Inconnues", s.unknowns),
+    ...list("Ce que j'observe", s.signals), ...list("Ce que je ne sais pas", s.unknowns),
     el("h4", { text: "Plausibilité" }), el("p", { text: s.plausibility }))));
 }
 
