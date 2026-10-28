@@ -3,130 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Carnet de veille · Edwyn Houillier</title>
+  <title>Veille technologique · Edwyn Houillier</title>
   <meta name="description" content="Veille technologique sur le développement logiciel : C#/.NET, Angular, GitHub et IA appliquée au développement.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="masthead wrap">
-    <a class="mark" href="#veille">Carnet de veille</a>
-    <nav aria-label="Pages">
-      <a href="#veille">Veille</a>
-      <a href="#objectifs">Objectifs &amp; KPIs</a>
-      <a href="#methode">Sources &amp; méthode</a>
-      <a href="#prospective">Prospective</a>
-      <a href="#criticite">Criticité</a>
-    </nav>
-  </header>
+  <main>
+    <header>
+      <p class="kicker">Veille technologique · Edwyn Houillier</p>
+      <h1>Développement logiciel et évolution du métier de développeur</h1>
+    </header>
 
-  <main class="wrap">
     <p id="load-error" class="error" hidden></p>
 
-    <!-- VEILLE -->
-    <section data-view="veille">
-      <div class="intro">
-        <h1>Développement logiciel et évolution du métier de développeur</h1>
-        <p>Je suis les sorties et les changements autour de C#, .NET, Angular et GitHub, et la place que prend l'IA dans le travail de développeur. Une session toutes les deux semaines.</p>
-        <p class="session-line" id="session-line"></p>
-      </div>
-
-      <dl class="figures" id="figures"></dl>
-
-      <div class="takeaway" id="takeaway"></div>
-
-      <div class="journal-head">
-        <h2>Journal</h2>
-        <div class="filters">
-          <input type="search" id="q" placeholder="Rechercher" aria-label="Recherche">
-          <select id="f-horizon" aria-label="Horizon"><option value="">Horizon</option><option>H1</option><option>H2</option><option>H3</option></select>
-          <select id="f-theme" aria-label="Thème"><option value="">Thème</option></select>
-          <label class="check"><input type="checkbox" id="f-weak"> signaux faibles</label>
-        </div>
-      </div>
-      <ol class="entries" id="entries"></ol>
+    <section>
+      <h2>1. Objectifs</h2>
+      <p id="smart"></p>
+      <dl class="rows" id="horizons"></dl>
     </section>
 
-    <!-- OBJECTIFS & KPIS -->
-    <section data-view="objectifs" hidden>
-      <h1>Objectifs et indicateurs</h1>
-      <p class="lede" id="smart"></p>
-      <div class="horizons" id="horizons"></div>
-
-      <h2>Indicateurs</h2>
-      <p class="note">Valeurs de la dernière session. Score qualité d'une info : 30 % pertinence, 25 % crédibilité, 25 % nouveauté, 20 % efficacité.</p>
-      <table class="kpis" id="kpis-table"></table>
+    <section>
+      <h2>2. Indicateurs (QMS)</h2>
+      <p class="note">Score qualité d'une info = 30 % pertinence + 25 % crédibilité + 25 % nouveauté + 20 % efficacité. Valeurs de la dernière session.</p>
+      <div class="scroll"><table id="kpis"></table></div>
     </section>
 
-    <!-- SOURCES & MÉTHODE -->
-    <section data-view="methode" hidden>
-      <h1>Sources et méthode</h1>
-      <ol class="cycle">
-        <li><b>Collecter</b>flux RSS officiels chaque semaine, docs et roadmaps à la main</li>
-        <li><b>Vérifier</b>auteur, date, source primaire, deuxième source</li>
-        <li><b>Analyser</b>notes sur 5, horizon, signal faible</li>
-        <li><b>Stocker</b>une session datée par quinzaine, rien n'est effacé</li>
-        <li><b>Diffuser</b>ce site, republié à chaque session</li>
-        <li><b>Ajuster</b>sources et mots-clés selon les KPIs</li>
-      </ol>
-
-      <div class="two-col">
-        <div>
-          <h2>Vérification</h2>
-          <ul class="plain">
-            <li><b>Fiabilité.</b> Chaque source a une note d'autorité. Les sources officielles passent en premier.</li>
-            <li><b>Recoupement.</b> Je ne marque une info « recoupée » que si la deuxième source est notée dans la fiche.</li>
-            <li><b>Date.</b> Date de publication et date de collecte. Si je ne la trouve pas, j'écris « inconnue ».</li>
-            <li><b>Hype.</b> Une préversion n'est pas une adoption. Reddit et Hacker News servent à repérer, pas à prouver.</li>
-            <li><b>Langues.</b> Anglais d'abord (c'est la langue des sources primaires), plus quelques sources françaises. Mots-clés avec variantes : agent, agentic, coding agent, MCP.</li>
-          </ul>
-        </div>
-        <div>
-          <h2>Outils</h2>
-          <table class="simple">
-            <tr><th>Collecte</th><td>Flux RSS, lecture manuelle</td></tr>
-            <tr><th>Analyse</th><td>Script Node.js + relecture</td></tr>
-            <tr><th>Visualisation</th><td>Ce site (JSON)</td></tr>
-            <tr><th>Organisation</th><td>Dépôt Git, une session par fichier</td></tr>
-            <tr><th>Automatisation</th><td>GitHub Actions, chaque lundi, session si la dernière a 14 jours</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <h2>Sources</h2>
-      <table class="sources" id="sources-table"></table>
-
-      <h2>Biais dont je tiens compte</h2>
-      <ul class="plain biases">
-        <li><b>Microsoft partout.</b> Beaucoup de sources viennent du même groupe : deux blogs Microsoft qui disent la même chose ne font pas un vrai recoupement.</li>
-        <li><b>Presque tout en anglais.</b> Normal pour le développement, mais le marché français est peu couvert.</li>
-        <li><b>Effet d'annonce.</b> Les agents IA occupent les annonces ; ça ne dit rien de leur usage réel.</li>
-        <li><b>Mes propres outils.</b> Je suis surtout ce que j'utilise déjà (C#, Angular, GitHub) et je peux rater des alternatives.</li>
-        <li><b>Notation automatique.</b> Les sessions automatiques notent par mots-clés. Elles sont marquées « auto » et à relire.</li>
+    <section>
+      <h2>3. Critères de vérification</h2>
+      <ul>
+        <li>Source officielle en priorité ; chaque source a une note d'autorité sur 5.</li>
+        <li>Recoupée seulement si une deuxième source est notée, et d'un autre éditeur si possible.</li>
+        <li>Date de publication vérifiée ; sinon « inconnue ».</li>
+        <li>Préversion ≠ adoption. Reddit et Hacker News servent à repérer, pas à prouver.</li>
+        <li>Mots-clés en anglais avec variantes (agent, agentic, coding agent) pour ne pas rater un synonyme.</li>
       </ul>
-
-      <h2>Historique des sessions</h2>
-      <table class="simple history" id="sessions-table"></table>
     </section>
 
-    <!-- PROSPECTIVE -->
-    <section data-view="prospective" hidden>
-      <h1>Trois scénarios à trois ans</h1>
-      <p class="lede" id="scen-note"></p>
-      <div class="scenarios" id="scenarios"></div>
+    <section>
+      <h2>4. Outils</h2>
+      <dl class="rows inline">
+        <dt>Collecte</dt><dd>Flux RSS officiels, lecture manuelle</dd>
+        <dt>Analyse</dt><dd>Script Node.js, puis relecture</dd>
+        <dt>Visualisation</dt><dd>Cette page</dd>
+        <dt>Organisation</dt><dd>Dépôt Git, un fichier JSON par session</dd>
+        <dt>Automatisation</dt><dd>GitHub Actions chaque lundi, nouvelle session tous les 14 jours</dd>
+      </dl>
+      <p id="sources"></p>
     </section>
 
-    <!-- CRITICITÉ -->
-    <section data-view="criticite" hidden>
-      <h1>Matrice de priorisation / criticité</h1>
-      <p class="lede">En attente du cahier des charges du cours <i>Étude Avant Projet</i>.</p>
-      <p>Les deux critères et leurs niveaux seront choisis à partir de ce cahier des charges, puis appliqués à chacune de ses exigences. Rien n'est rempli d'ici là.</p>
+    <section>
+      <h2>5. Biais</h2>
+      <ul>
+        <li>Beaucoup de sources Microsoft : deux blogs du même groupe ne font pas un vrai recoupement.</li>
+        <li>Presque tout en anglais, peu de sources françaises.</li>
+        <li>Effet d'annonce autour des agents IA.</li>
+        <li>Je suis surtout les outils que j'utilise déjà.</li>
+        <li>Le tri automatique par mots-clés doit être relu.</li>
+      </ul>
     </section>
+
+    <section>
+      <h2 id="session-title">6. Dernière session</h2>
+      <p id="conclusion"></p>
+      <ul class="items" id="items"></ul>
+    </section>
+
+    <section>
+      <h2>7. Historique des sessions</h2>
+      <div class="scroll"><table id="history"></table></div>
+    </section>
+
+    <section>
+      <h2>8. Scénarios à trois ans</h2>
+      <dl class="rows" id="scenarios"></dl>
+    </section>
+
+    <section>
+      <h2>9. Matrice de criticité</h2>
+      <p>En attente du cahier des charges du cours <i>Étude Avant Projet</i>.</p>
+    </section>
+
+    <footer id="foot"></footer>
   </main>
-
-  <footer class="wrap foot" id="foot"></footer>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
