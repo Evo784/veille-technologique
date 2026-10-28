@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --paper: #f7f5f0;
   --ink: #1c1b19;
   --muted: #6b675f;
@@ -20,7 +20,17 @@ h1, h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; }
 h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.15; margin: 0 0 14px; }
 h2 { font-size: 1.35rem; margin: 0 0 12px; }
 .kicker { color: var(--muted); font-size: .85rem; margin: 0 0 8px; }
-section { border-top: 1px solid var(--rule); padding-top: 28px; margin-top: 40px; }
+details { border-top: 1px solid var(--rule); }
+details:last-of-type { border-bottom: 1px solid var(--rule); }
+summary { cursor: pointer; list-style: none; padding: 14px 0; display: flex; justify-content: space-between; align-items: baseline; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--muted); font-size: 1.2rem; }
+details[open] summary::after { content: "–"; }
+summary h2 { margin: 0; font-size: 1.2rem; }
+summary:hover h2 { color: var(--accent); }
+details > :not(summary) { margin-top: 0; }
+details[open] { padding-bottom: 20px; }
+header { margin-bottom: 32px; }
 .error { color: var(--accent); }
 
 .items { list-style: none; padding: 0; margin: 20px 0 0; }

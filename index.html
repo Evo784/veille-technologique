@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -19,20 +19,17 @@
 
     <p id="load-error" class="error" hidden></p>
 
-    <section>
-      <h2>1. Objectifs</h2>
+    <details><summary><h2>1. Objectifs</h2></summary>
       <p id="smart"></p>
       <dl class="rows" id="horizons"></dl>
-    </section>
+    </details>
 
-    <section>
-      <h2>2. Indicateurs (QMS)</h2>
+    <details><summary><h2>2. Indicateurs (QMS)</h2></summary>
       <p class="note">Score qualité d'une info = 30 % pertinence + 25 % crédibilité + 25 % nouveauté + 20 % efficacité. Valeurs de la dernière session.</p>
       <div class="scroll"><table id="kpis"></table></div>
-    </section>
+    </details>
 
-    <section>
-      <h2>3. Critères de vérification</h2>
+    <details><summary><h2>3. Critères de vérification</h2></summary>
       <ul>
         <li>Source officielle en priorité ; chaque source a une note d'autorité sur 5.</li>
         <li>Recoupée seulement si une deuxième source est notée, et d'un autre éditeur si possible.</li>
@@ -40,10 +37,9 @@
         <li>Préversion ≠ adoption. Reddit et Hacker News servent à repérer, pas à prouver.</li>
         <li>Mots-clés en anglais avec variantes (agent, agentic, coding agent) pour ne pas rater un synonyme.</li>
       </ul>
-    </section>
+    </details>
 
-    <section>
-      <h2>4. Outils</h2>
+    <details><summary><h2>4. Outils</h2></summary>
       <dl class="rows inline">
         <dt>Collecte</dt><dd>Flux RSS officiels, lecture manuelle</dd>
         <dt>Analyse</dt><dd>Script Node.js, puis relecture</dd>
@@ -52,10 +48,9 @@
         <dt>Automatisation</dt><dd>GitHub Actions chaque lundi, nouvelle session tous les 14 jours</dd>
       </dl>
       <p id="sources"></p>
-    </section>
+    </details>
 
-    <section>
-      <h2>5. Biais</h2>
+    <details><summary><h2>5. Biais</h2></summary>
       <ul>
         <li>Beaucoup de sources Microsoft : deux blogs du même groupe ne font pas un vrai recoupement.</li>
         <li>Presque tout en anglais, peu de sources françaises.</li>
@@ -63,28 +58,24 @@
         <li>Je suis surtout les outils que j'utilise déjà.</li>
         <li>Le tri automatique par mots-clés doit être relu.</li>
       </ul>
-    </section>
+    </details>
 
-    <section>
-      <h2 id="session-title">6. Dernière session</h2>
+    <details open><summary><h2 id="session-title">6. Dernière session</h2></summary>
       <p id="conclusion"></p>
       <ul class="items" id="items"></ul>
-    </section>
+    </details>
 
-    <section>
-      <h2>7. Historique des sessions</h2>
+    <details><summary><h2>7. Historique des sessions</h2></summary>
       <div class="scroll"><table id="history"></table></div>
-    </section>
+    </details>
 
-    <section>
-      <h2>8. Scénarios à trois ans</h2>
+    <details><summary><h2>8. Scénarios à trois ans</h2></summary>
       <dl class="rows" id="scenarios"></dl>
-    </section>
+    </details>
 
-    <section>
-      <h2>9. Matrice de criticité</h2>
+    <details><summary><h2>9. Matrice de criticité</h2></summary>
       <p>En attente du cahier des charges du cours <i>Étude Avant Projet</i>.</p>
-    </section>
+    </details>
 
     <footer id="foot"></footer>
   </main>
