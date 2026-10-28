@@ -34,7 +34,7 @@ header { margin-bottom: 32px; }
 .error { color: var(--accent); }
 
 .items { list-style: none; padding: 0; margin: 20px 0 0; }
-.items li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 8px 0; }
+.items li { padding: 6px 0; }
 .items .date, .src { color: var(--muted); font-size: .85rem; }
 .items .action { display: block; color: var(--muted); font-size: .9rem; }
 

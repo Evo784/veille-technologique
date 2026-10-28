@@ -71,10 +71,7 @@ async function init() {
   // Dernière session
   $("session-title").textContent = cur.lastSession ? `6. Session du ${longDate(cur.lastSession)}` : "6. Aucune session pour l'instant";
   $("conclusion").textContent = cur.analysis?.conclusion ?? "";
-  $("items").replaceChildren(...items.map((i) => el("li", {},
-    el("span", { class: "date", text: shortDate(i.publishedAt) }),
-    el("span", {}, link(i.url, i.title),
-      el("span", { class: "src", text: ` · ${srcById.get(i.source)?.name ?? i.source} · ${(i.horizon ?? []).join(" ")}${i.weakSignal ? " · signal faible" : ""}` })))));
+  $("items").replaceChildren(...items.map((i) => el("li", {}, link(i.url, i.title))));
 
   // Historique
   $("history").replaceChildren(
