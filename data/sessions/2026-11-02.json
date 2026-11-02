@@ -1,0 +1,487 @@
+{
+  "date": "2026-11-02",
+  "type": "automatique (flux RSS, notation par mots-clés)",
+  "window": {
+    "from": "2026-10-19",
+    "to": "2026-11-02"
+  },
+  "examined": 30,
+  "examinedNote": "Entrées des flux RSS lues ; seules celles parues depuis la dernière session et non déjà connues sont évaluées.",
+  "items": [
+    {
+      "id": "2026-10-27-dotnet-blog-blazor-welcomes-infragistics",
+      "title": "Blazor Welcomes Open-Source Contributions from Infragistics",
+      "summary": "Microsoft and Infragistics are collaborating on Blazor through free, open-source components, new .NET 11 analyzers, and developer tooling. The post Blazor Welcomes Open-Source Contributions from Infragistics appeared first on .NET Blog .",
+      "theme": "dotnet-csharp",
+      "horizon": [
+        "H1"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/blazor-welcomes-infragistics/",
+      "lang": "en",
+      "publishedAt": "2026-10-27",
+      "collectedAt": "2026-11-02",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 5,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (.net 11, .net, blazor). À valider ou corriger à la main.",
+      "quality": 4.35
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-github-copilot-in-vs-code-uni",
+      "title": "GitHub Copilot in VS Code, Universe releases",
+      "summary": "This year, we focused on giving you more choice in how you work with GitHub Copilot in Visual Studio Code: which models you use, where your agents run, and how&#8230; The post GitHub Copilot in VS Code, Universe releases appeared first on The GitHub Blog .",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 5,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot, agent). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.35
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-route-and-orchestrate-models-",
+      "title": "Route and orchestrate models with GitHub Copilot Fusion",
+      "summary": "GitHub Copilot Fusion is generally available. Instead of picking a model for each task, choose Copilot Fusion and let Copilot intelligently route and orchestrate which models it uses for you.&#8230; The post Route and orchestrate models with GitHub Copilot Fusion appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": true,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.25
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-security-extension-for-the-gi",
+      "title": "Security extension for the GitHub Copilot app",
+      "summary": "You can now work through your repository's GitHub code scanning alerts without leaving the GitHub Copilot app. The new GitHub security extension, now in public preview, lets you find the&#8230; The post Security extension for the GitHub Copilot app appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-security-extension-for-the-github-copilot-app",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": true,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.25
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-repository-plugin-defaults-an",
+      "title": "Repository plugin defaults and enterprise plugin controls generally available",
+      "summary": "Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app. Trusted repositories can install and enable default plugins for&#8230; The post Repository plugin defaults and enterprise plugin controls generally available appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": true,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.25
+    },
+    {
+      "id": "2026-10-19-dotnet-blog-bring-your-own-model-to-the-github-copil",
+      "title": "Bring Your Own Model to the GitHub Copilot SDK with C#",
+      "summary": "The GitHub Copilot SDK gives your application an agent runtime. BYOK lets you keep that runtime while sending model requests to your own Microsoft Foundry or Azure OpenAI deployment. Here is the complete C# setup. The post Bring Your Own Model to the GitHub Copilot SDK with C# appeared first on .NET Blog .",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+      "lang": "en",
+      "publishedAt": "2026-10-19",
+      "collectedAt": "2026-11-02",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 3,
+      "efficacy": 3,
+      "utility": 5,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
+        "https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (c#, .net, github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.1
+    },
+    {
+      "id": "2026-10-19-github-blog-how-to-continue-a-github-copilot-app-ses",
+      "title": "How to continue a GitHub Copilot app session in VS Code",
+      "summary": "Learn how to move an agent session from the GitHub Copilot app into VS Code without losing the conversation, code changes, or working context. The post How to continue a GitHub Copilot app session in VS Code appeared first on The GitHub Blog .",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "github-blog",
+      "url": "https://github.blog/ai-and-ml/github-copilot/how-to-continue-a-github-copilot-app-session-in-vs-code/",
+      "lang": "en",
+      "publishedAt": "2026-10-19",
+      "collectedAt": "2026-11-02",
+      "relevance": 5,
+      "credibility": 5,
+      "novelty": 3,
+      "efficacy": 3,
+      "utility": 5,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot, agent). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.1
+    },
+    {
+      "id": "2026-10-29-dotnet-blog-blazor-welcomes-syncfusion",
+      "title": "Blazor Welcomes Open-Source Contributions from Syncfusion",
+      "summary": "Microsoft and Syncfusion are collaborating on Blazor through a free, open-source component toolkit, framework contributions, and developer tooling. The post Blazor Welcomes Open-Source Contributions from Syncfusion appeared first on .NET Blog .",
+      "theme": "dotnet-csharp",
+      "horizon": [
+        "H1"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/blazor-welcomes-syncfusion/",
+      "lang": "en",
+      "publishedAt": "2026-10-29",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 4,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (.net, blazor). À valider ou corriger à la main.",
+      "quality": 4.05
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-github-copilot-app-universe-r",
+      "title": "GitHub Copilot app, Universe releases",
+      "summary": "Work doesn't always fit in a single repository or session. A feature can span several repositories. A launch plan can pull in specs, designs, and assets without touching a repository&#8230; The post GitHub Copilot app, Universe releases appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.05
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-github-enterprise-now-include",
+      "title": "GitHub Enterprise now includes access to GitHub Copilot",
+      "summary": "Enterprises working with a GitHub or Microsoft account team can now get Copilot included with GitHub Enterprise for every licensed user. Previously, you had to manage two things: how many&#8230; The post GitHub Enterprise now includes access to GitHub Copilot appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.05
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-generate-and-edit-images-dire",
+      "title": "Generate and edit images directly in Copilot",
+      "summary": "You can now generate and edit images using natural language in GitHub Copilot. When you ask for an image, your selected reasoning model calls a dedicated image-generation tool powered by&#8230; The post Generate and edit images directly in Copilot appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-generate-and-edit-images-directly-in-copilot",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 4.05
+    },
+    {
+      "id": "2026-10-19-dotnet-blog-migrate-dotnet-maui-apps-uikit-scene-lif",
+      "title": "Get Your .NET MAUI App Ready for Xcode 27",
+      "summary": "Use an agent skill to prepare your existing .NET MAUI app for Xcode 27, with the scene lifecycle changes and manual migration steps explained. The post Get Your .NET MAUI App Ready for Xcode 27 appeared first on .NET Blog .",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "dotnet-blog",
+      "url": "https://devblogs.microsoft.com/dotnet/migrate-dotnet-maui-apps-uikit-scene-lifecycle/",
+      "lang": "en",
+      "publishedAt": "2026-10-19",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 3,
+      "efficacy": 4,
+      "utility": 4,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": false,
+      "actionable": true,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (.net, agent). À valider ou corriger à la main.",
+      "quality": 4
+    },
+    {
+      "id": "2026-10-20-github-blog-how-3-java-champions-are-using-github-co",
+      "title": "How 3 Java Champions are using GitHub Copilot for increased productivity",
+      "summary": "Three Java Champions share how they use GitHub Copilot to solve problems, accelerate development, and keep humans responsible for the results. The post How 3 Java Champions are using GitHub Copilot for increased productivity appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-blog",
+      "url": "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/",
+      "lang": "en",
+      "publishedAt": "2026-10-20",
+      "collectedAt": "2026-11-02",
+      "relevance": 4,
+      "credibility": 5,
+      "novelty": 3,
+      "efficacy": 3,
+      "utility": 4,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (github copilot, copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 3.8
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-github-intelligence-puts-your",
+      "title": "GitHub intelligence puts your code, context, and history to work",
+      "summary": "Agents should understand more than your codebase&#8212;they should understand how your team works. Your preferences, repository conventions, skills, and custom instructions guide how changes should be made, while code in&#8230; The post GitHub intelligence puts your code, context, and history to work appeared first on The GitHub Blog .",
+      "theme": "agents-ia",
+      "horizon": [
+        "H2",
+        "H3"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 3,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 3,
+      "crossChecked": false,
+      "crossCheckWith": [],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (agent). À valider ou corriger à la main.",
+      "quality": 3.75
+    },
+    {
+      "id": "2026-10-28-github-changelog-2026-10-28-build-shared-workflows-for-yo",
+      "title": "Build shared workflows for your team with Copilot Automations",
+      "summary": "Shared Copilot Automations are rolling out, enabling teams to build and maintain AI-powered workflows together. With Copilot Automations, you can combine prompts, triggers, and tools to design workflows around the&#8230; The post Build shared workflows for your team with Copilot Automations appeared first on The GitHub Blog .",
+      "theme": "github-copilot",
+      "horizon": [
+        "H1"
+      ],
+      "source": "github-changelog",
+      "url": "https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations",
+      "lang": "en",
+      "publishedAt": "2026-10-28",
+      "collectedAt": "2026-11-02",
+      "relevance": 3,
+      "credibility": 5,
+      "novelty": 4,
+      "efficacy": 3,
+      "utility": 3,
+      "crossChecked": true,
+      "crossCheckWith": [
+        "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+        "https://github.blog/ai-and-ml/github-copilot/how-3-java-champions-are-using-github-copilot-for-increased-productivity/"
+      ],
+      "weakSignal": false,
+      "actionable": false,
+      "action": null,
+      "review": "auto",
+      "notes": "Notation automatique par mots-clés (copilot). À valider ou corriger à la main. Recoupé via « copilot ».",
+      "quality": 3.75
+    }
+  ],
+  "weakSignals": [],
+  "adjustments": {
+    "sources": [],
+    "keywords": [],
+    "horizons": []
+  },
+  "analysis": {
+    "conclusion": "15 informations conservées sur 30 lues. Notation automatique : à valider manuellement."
+  },
+  "kpis": {
+    "count": 15,
+    "relevance_rate": 86.7,
+    "quality_avg": 4.08,
+    "crosscheck_rate": 76.9,
+    "crosscheck_base": 13,
+    "weak_signals": 0,
+    "actionable_rate": 26.7,
+    "nonfr_rate": 100,
+    "authority_avg": 5,
+    "volume": 15,
+    "utility_avg": 4.13
+  },
+  "byTheme": {
+    "dotnet-csharp": 2,
+    "agents-ia": 5,
+    "github-copilot": 8
+  },
+  "byHorizon": {
+    "H1": 10,
+    "H2": 5,
+    "H3": 5
+  }
+}
